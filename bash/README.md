@@ -43,3 +43,15 @@ Websites:
 * [Official Site](https://www.docker.com/)
 * [DaoCloud Download](http://get.daocloud.io/)
 * [Docker Hub](https://hub.docker.com/)
+
+## set-git
+
+```bash
+$ ./set-git.sh
+```
+
+Options:
+	-u User_name      set commit user name
+	-e Email_address  set commit user email
+
+This script will set some other things even if you have no parameters.
