@@ -13,13 +13,13 @@ User=
 DockerRegistry=
 DockerMirrors='https://download.docker.com/linux/debian'
 
-while getopts 'u:n:m:c' OPT
+while getopts 'u:r:m:ch' OPT
 do
 	case $OPT in
 		u)
 		User=$OPTARG
 		;;
-		n)
+		r)
 		DockerRegistry=$OPTARG
 		;;
 		m)
@@ -28,8 +28,9 @@ do
 		c)
 		InstallCompose=$OPTARG
 		;;
-		?)
-		echo "Usage: `basename $0` [-u 'user_add_to_docker'] [-n 'fast_docker_reg'] [-m 'fast_docker_mirrors'] [-c]"
+		h|?)
+		echo "Usage: `basename $0` [-u 'user_add_to_docker'] [-r 'fast_docker_reg'] [-m 'fast_docker_mirrors'] [-c]"
+		exit
 		;;
 	esac
 done
@@ -43,7 +44,7 @@ apt-get install -y \
 	gnupg2 \
 	software-properties-common
 
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+curl -fsSL ${DockerMirrors}/gpg | sudo apt-key add -
 apt-key fingerprint 0EBFCD88
 
 add-apt-repository "deb [arch=amd64] $DockerMirrors $(lsb_release -cs) stable"
